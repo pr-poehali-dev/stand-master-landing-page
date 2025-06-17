@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Icon from "@/components/ui/icon";
+import MobileMenu from "@/components/MobileMenu";
 
 const Header = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: "smooth" });
@@ -43,11 +46,19 @@ const Header = () => {
             </button>
           </nav>
 
-          <button className="md:hidden">
+          <button
+            className="md:hidden"
+            onClick={() => setIsMobileMenuOpen(true)}
+          >
             <Icon name="Menu" size={24} className="text-gray-700" />
           </button>
         </div>
       </div>
+
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+      />
     </header>
   );
 };
